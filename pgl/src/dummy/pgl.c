@@ -94,6 +94,8 @@ PGLContext pglCreateContext(void)
     {
         ctx = &g_contexts[g_usedContexts++];
         ctx->id = g_usedContexts;
+        ctx->nBlits = 0;
+        ctx->texture = 0;
     }
     fprintf(stdout, "pglCreateContext() ret :%d\n", ctx ? ctx->id : 0);
     return ctx;
@@ -120,6 +122,9 @@ PGLTexture pglCreateTexture(PGLContext context)
     {
         tx = &g_textures[g_usedTextures++];
         tx->id = g_usedTextures;
+        tx->crc = 0;
+        tx->height = 0;
+        tx->width = 0;
     }
     fprintf(stdout, "pglCreateTexture(%d) ret :%d\n", context ? context->id : 0, tx ? tx->id : 0);
     return tx;

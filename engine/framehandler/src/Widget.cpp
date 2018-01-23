@@ -214,7 +214,6 @@ bool Widget::verify(Canvas& canvas, const Area& area)
             if (!pChild->verify(canvas, childArea))
             {
                 result = false;
-                break;
             }
         }
     }

@@ -62,6 +62,8 @@ BitmapField* BitmapField::create(WidgetPool& widgetPool,
 BitmapField::BitmapField(const Database& db, const StaticBitmapFieldType* const pDdh)
     : m_pDdh(pDdh)
     , m_db(db)
+    , m_bitmapExpr()
+    , m_bitmapId(0U)
 {
     ASSERT(NULL != m_pDdh);
 }

@@ -36,6 +36,9 @@
 #include "OdiMsgHeader.h"
 #include "MessageHeader.h"
 #include "DataResponseMessage.h"
+#include "DataHandler.h"
+#include "FrameHandler.h"
+#include "DisplayManager.h"
 
 using namespace psc;
 
@@ -211,4 +214,31 @@ TEST_F(EngineTest, fuConnection)
     EXPECT_EQ(PSC_TRUE, pscVerify(engine)); // both icons are drawn
 
     EXPECT_EQ(PSC_NO_ERROR, pscDelete(engine));
+    std::string output = testing::internal::GetCapturedStdout();
 }
+
+TEST_F(EngineTest, verificationErrorCount)
+{
+    testing::internal::CaptureStdout();
+    psc::Database db(m_ddhbin, m_imgbin);
+    psc::DataHandler dataHandler(db);
+    psc::DisplayManager dsp;
+    psc::FrameHandler frameHandler(db, dataHandler, dsp);
+    EXPECT_TRUE(frameHandler.start());
+    psc::Number value1;
+    psc::Number value2;
+    dataHandler.getNumber(255, 1, value1);
+    dataHandler.getNumber(255, 2, value2);
+    EXPECT_EQ(0, value1.getU32());
+    EXPECT_EQ(0, value2.getU32());
+    // both images are expected to fail, because there was no rendering before
+    frameHandler.update(0);
+    EXPECT_FALSE(frameHandler.verify());
+    // error count is incremented for both bitmaps
+    dataHandler.getNumber(255, 1, value1);
+    dataHandler.getNumber(255, 2, value2);
+    EXPECT_EQ(1, value1.getU32());
+    EXPECT_EQ(1, value2.getU32());
+    std::string output = testing::internal::GetCapturedStdout();
+}
+
