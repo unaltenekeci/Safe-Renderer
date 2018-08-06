@@ -37,10 +37,6 @@ The whole list of variables you can find in the `cmake/Variables.cmake` file.
 After building is finished, you can find Luxoft Safe-Renderer as a static library that you can link to your project.
 The header file with exported Safe-Renderer's functions you can find in `engine\psc\psc.h` (***under development***)
 
-The following diagram illustrates the common workflow:
-
-![Sequence diagram](https://sfa.luxoft.com/f/fc631d9343884d92ba4c/?raw=true)
-
 ## Bugs
 Please use 'issues' on GitHub for Luxoft Safe-Renderer.
 
