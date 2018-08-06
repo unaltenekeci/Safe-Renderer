@@ -39,7 +39,7 @@ The header file with exported Safe-Renderer's functions you can find in `engine\
 
 The following diagram illustrates the common workflow:
 
-![Sequence diagram](https://sfa.luxoft.com/f/fc631d9343884d92ba4c/?dl=1)
+![Sequence diagram](https://sfa.luxoft.com/f/fc631d9343884d92ba4c/?raw=true)
 
 ## Bugs
 Please use 'issues' on GitHub for Luxoft Safe-Renderer.
